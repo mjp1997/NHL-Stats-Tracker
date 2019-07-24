@@ -1,5 +1,4 @@
 let stats;
-//Oskar Sundquist = 8476897
 let baseURL = 'http://statsapi.web.nhl.com/api/v1/teams/';
 let teamSelector = '/roster';
 
