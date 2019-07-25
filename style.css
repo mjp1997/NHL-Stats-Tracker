@@ -41,16 +41,19 @@ color: brown;
 text-align: center;
 padding-bottom:0px;
 }
-#searchField{
+
+#searchField
+{
 	text-align: left;
 	height: 30px;
 	font-size: 16px;
 	width: 250px;
 	margin-bottom: 5px;
 }
-#tempButton{
-	width: 120px;
-	height: 30px;
 
+#tempButton
+{
+	width: 120px;
+	height: 35px;
 }
 
