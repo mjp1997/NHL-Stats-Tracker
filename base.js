@@ -5,7 +5,7 @@ let teamSelector = '/roster';
 function buttonLink() {
 	userInput = document.getElementById('searchField').value;
 	teamsArray = ['Buffer', 'Devils', 'Islanders', 'Rangers', 'Flyers', 'Penguins',
-	'Bruins', 'Sabres', 'Canadiens', 'Senators', 'Leafs', 'Hurricanes', 'Panthers', 
+	'Bruins', 'Sabres', 'Canadiens', 'Senators', 'Leafs', 'Buffer','Hurricanes', 'Panthers', 
 	'Lightning', 'Capitals', 'Blackhawks', 'Red Wings', 'Predators', 'Blues', 'Flames', 
 	'Avalanche', 'Oilers', 'Canucks', 'Ducks', 'Stars', 'Kings', 'Buffer', 'Sharks', 
 	'Blue Jackets', 'Wild'];
@@ -22,11 +22,21 @@ function buttonLink() {
 
 }
 function loadAPI(userTeam) {
-	let url = baseURL + userTeam + teamSelector;
+	let completeUrl = baseURL + userTeam + teamSelector;
 	console.log(userTeam)
-	console.log(url)
-	// loadJSON(url, retrieveData);
-}
-function retrieveData(data) {
-	stats = data;
-}
+	console.log(completeUrl)
+
+	 $.ajax({
+	 	type: "GET",
+	 	url: completeUrl,
+	 	async: false,
+		 success: function(completeUrl){
+			for(i = 0; i < completeUrl['roster'].length; i++){
+			myPlayer = completeUrl['roster'][i]['person']['fullName']
+			console.log(myPlayer);
+			$('.rightContainerInfo').html(myPlayer);
+			// document.getElementById("rightContainerInfo").innerHTML = myPlayer;
+		}
+	 }
+	})
+	}

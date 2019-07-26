@@ -34,6 +34,9 @@ font-weight: bolder;
 border: double;
 font-size: 20px;
 }
+#rightContainerInfo{
+color: blue;
+}
 
 .myHeader 
 {
@@ -49,6 +52,7 @@ padding-bottom:0px;
 	font-size: 16px;
 	width: 250px;
 	margin-bottom: 5px;
+	padding-left: 3px;
 }
 
 #tempButton
