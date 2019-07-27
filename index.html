@@ -2,25 +2,30 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width">
-	<h1 class='myHeader'>NHL STATS TRACKER
-		<img src="nhlLogo.png" class="myLogo"> </div>
-	</h1>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>NHL Stats API</title>
 	<link rel="stylesheet" href="style.css">
-	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-	<script type= 'text/javascript' src='jquery.js'></script>
+	<h1 class='myHeader'>
+		<div class='itemWrapper'>
+		<div id ='headerText'>NHL STATS TRACKER</div>
+		<div class ='logoCont'><img src="nhlLogo.png" class="nhlLogo"> </div></h1></div>
+	<script type='text/javascript' src='jquery.js'></script>
 </head>
 
 <body>
 	<div class='overallContainer'>
-		<div class='leftContainer'> Search For NHL Stats and Information:
-			<br><br> <input id='searchField' placeholder=' Please enter your favorite player: '>
-			</input>
-			<button id='tempButton' onclick="buttonLink()"> Submit: </button>
-		</div>
-		<div class='rightContainer'> Other Info:</div>
-		<div id ='rightContainerInfo'></div>
+			<div class='contOne'>
+					<div class='rosterHeader'>View Roster:
+						<br>
+					</div>
+					<div class ='dropDownWrapper'>
+					<select id='dropDownInfo' onchange="buttonLink()">
+					</select>
+					<ul id='pasteData'></ul>
+			</div></div>
+			<div class ='contTwo'>
+				hello
+			</div>
 	</div>
 </body>
 <script src='base.js'></script>

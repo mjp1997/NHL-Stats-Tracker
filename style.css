@@ -1,63 +1,103 @@
-html 
-{
-background-color: lightblue;
-font-family: 'Raleway', sans-serif;
+html{
+font-family:'Open Sans', sans-serif
 }
-
-.myLogo 
+body{
+	margin:0;
+}
+.nhlLogo 
 {
 width: 100px;
 height: 100px;
 padding-left: 50px;
 }
-
+li{
+	list-style-type: none;
+}
 .overallContainer
 {
-width: 100%;
 display: flex;
 }
+#pasteData{
+	font-size:20px;
+    padding-inline-start: 0px;
+	
+}
+#headerText{
+	padding-top:30px;
+	text-align: center;
+}
+.itemWrapper{
+	display: flex;
+	margin: auto;
+}
 
-.leftContainer
+.contOne
 {
-width: 50%;
+text-align: center;
+font-size: 20px;
+width: 33%;
+}
+.contTwo{
 text-align: center;
 font-weight: bolder;
-border: double;
 font-size: 20px;
 }
 
-.rightContainer 
-{
-width: 50%;
-text-align: center;
-font-weight: bolder;
-border: double;
-font-size: 20px;
+.contOneWrapper{
+	align-items: center;
+	justify-content: center;
+	display: grid;
 }
-#rightContainerInfo{
-color: blue;
-}
-
 .myHeader 
 {
-color: brown;
-text-align: center;
-padding-bottom:0px;
+color:white;
+display:flex;
+background-color: #0073aa;
+margin:0;
 }
-
-#searchField
-{
-	text-align: left;
-	height: 30px;
-	font-size: 16px;
-	width: 250px;
-	margin-bottom: 5px;
-	padding-left: 3px;
+.rosterHeader{
+	padding-top: 20px;
+	font-size: 30px;
+	padding-bottom: 10px;
 }
-
-#tempButton
-{
-	width: 120px;
-	height: 35px;
+.containerDiv{
+	color: blue;
 }
+#dropDownInfo{
+	 position: relative;
+	width: 55%;
+	margin: 0;
+	padding: 6px 8px 6px 10px;
+	height: 28px;
+	line-height: 14px;
+	color: #62717a;
+	text-shadow: 0 1px white;
+	background: #f2f2f2; 
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .4);
+    background-color: #CFCFCF
+}
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #F5F5F5
+}
+::-webkit-scrollbar-thumb {
+    background-color: #2C3E50
+}
+.dropDownText{
+	font-family:'Open Sans', sans-serif;
+}
+.formatResult{
+	padding-bottom: 10px;
 
+}
+  option{
+	
+		/* display: none; */
+		position: absolute;
+		background-color: #f1f1f1;
+		min-width: 160px;
+		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		z-index: 1;
+  }
