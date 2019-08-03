@@ -30,21 +30,36 @@ function buttonLink() {
 
 function loadAPI(userTeam) {
 	let completeUrl = baseURL + userTeam + teamSelector;
+	let siteUrl = baseURL + userTeam;
+	console.log(siteUrl)
 	console.log(userTeam)
 	console.log(completeUrl)
-
 	let myDiv = document.getElementById('pasteData');
 	myDiv.innerHTML = '';
 
 	$.ajax({
 		type: "GET",
 		url: completeUrl,
-		async: false,
+		async: true,
 		success: function (completeUrl) {
 			for (i = 0; i < completeUrl['roster'].length; i++) {
 				let myPlayer = completeUrl['roster'][i]['person']['fullName'];
-				myDiv.innerHTML += "<li class='formatResult'>" + myPlayer + "<li /> ";
+				let playerNum = completeUrl['roster'][i]['jerseyNumber']
+				let playerPos = completeUrl['roster'][i]['position']['abbreviation']
+				myDiv.innerHTML += "<li class='formatResult'>" + '#' + playerNum + ' ' + myPlayer + " - " + playerPos + "<li /> ";
 			}
 		}
 	})
+	$.ajax({
+		type: "GET",
+		url: siteUrl,
+		async: true,
+		success: function (siteUrl) {
+			let myTeamURL = siteUrl['teams'][0]['officialSiteUrl'];
+			console.log(myTeamURL)
+			myDiv.innerHTML += "<li class='formatResult'>For more information, visit the team site! </li>"
+			myDiv.innerHTML += "<a href ='formatResult'>" + myTeamURL + "<br> <br>";
+		}
+	})
 }
+
