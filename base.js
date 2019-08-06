@@ -41,8 +41,9 @@ function buttonLink() {
 			loadAPI(urlParam)
 		}
 	});
-
+	
 }
+
 //composing base URL
 function loadAPI(userTeam) {
 	let completeUrl = baseURL + userTeam + teamSelector;
@@ -72,35 +73,23 @@ function loadAPI(userTeam) {
 				let myPlayer = completeUrl['roster'][i]['person']['fullName'];
 				let playerNum = completeUrl['roster'][i]['jerseyNumber'];
 				let playerPos = completeUrl['roster'][i]['position']['abbreviation'];
+				let playerId = myPlayer.split(' ').join('_');
 				if (playerNum == null) {
 					playerNum = '(pending)';
-					myDiv.innerHTML += "<li class='formatResult'>" + playerNum + ' ' + myPlayer + " - " + playerPos + "<li /> "
+					myDiv.innerHTML += "<li class='formatResult' id =" + playerId + '>' + playerNum + ' ' + myPlayer + ' - ' + playerPos + '<li /> '
+					document.getElementById(playerId).addEventListener("click", myFunct);		
 				}
-				else {
-					myDiv.innerHTML += "<li class='formatResult'>" + '#' + playerNum + ' ' + myPlayer + " - " + playerPos + "<li /> ";
-				}
+				else{
+					myDiv.innerHTML += "<li class='formatResult' id =" + playerId + '>' + '#' + playerNum + ' ' + myPlayer + ' - ' + playerPos + '<li /> '
+					let playerInfo = document.getElementById(playerId);
+					playerInfo.addEventListener("click", myFunct);
 			}
 
 		}
-	})
-		/ $.ajax({
-			type: "GET",
-			url: completeUrl,
-			async: true,
-			success: function (completeUrl) {
-				for (i = 0; i < completeUrl['roster'].length; i++) {
-					let myPlayer = completeUrl['roster'][i]['person']['fullName'];
-					let playerNum = completeUrl['roster'][i]['jerseyNumber'];
-					let playerPos = completeUrl['roster'][i]['position']['abbreviation'];
-					if (playerNum == null) {
-						playerNum = '(pending)';
-						myDiv.innerHTML += "<li class='formatResult'>" + playerNum + ' ' + myPlayer + " - " + playerPos + "<li /> "
-					}
-					else {
-						myDiv.innerHTML += "<li class='formatResult'>" + '#' + playerNum + ' ' + myPlayer + " - " + playerPos + "<li /> ";
-					}
-				}
+	}
+	});
+	function myFunct(){
+	console.log(playerId);
+}
 
-			}
-		})
 }
