@@ -98,7 +98,7 @@ function loadAPI(userTeam) {
 				let playerId = myPlayer.split(' ').join('_');
 				if (playerNum == null) {
 					playerNum = '(pending)';
-					myDiv.innerHTML += "<li class='formatResult' id =" + playerId + ' onclick = playerFacts(this)' + '>' + playerNum + ' ' + myPlayer + ' - ' + playerPos + '<li /> '
+					myDiv.innerHTML += "<li class='formatResult' id =" + playerId + ' onclick = playerFacts(' + factsId + ')' + '>' + playerNum + ' ' + myPlayer + ' - ' + playerPos + '<li /> '
 				}
 				else {
 					myDiv.innerHTML += "<li class='formatResult' id =" + playerId + ' onclick = playerFacts(' + factsId + ')' + '>' + '#' + playerNum + ' ' + myPlayer + ' - ' + playerPos + '<li /> '

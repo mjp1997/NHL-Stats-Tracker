@@ -40,11 +40,16 @@ width: 33%;
 padding-left: 40px;
 
 }
-.contTwoWrapper{
+.contTwo{
 text-align: center;
 font-weight: bolder;
 font-size: 20px;
 width: 66%;
+}
+.contTwoWrapper{
+padding-top: 38px;
+padding-left: 20px;
+padding-right: 20px;
 }
 
 .contOneWrapper{
@@ -90,16 +95,26 @@ margin:0;
 ::-webkit-scrollbar-thumb {
     background-color: #2C3E50
 }
+li:active {
+	background: #838282;
+	-webkit-box-shadow: inset 0px 0px 5px #838282;
+	-moz-box-shadow: inset 0px 0px 5px #838282;
+	box-shadow: inset 0px 0px 5px #838282;
+	outline: none;
+  }
 .dropDownText{
 	font-family:'Open Sans', sans-serif;
 }
 .formatResult{
 	/* padding-bottom: 10px; */
-	border-style: groove;
+	border-style: outset;
 	background-color: #0073aa;
 	color: white;
 	padding: 10px;
-
+	border-top: 3px solid silver;
+	border-bottom: 0px;
+	border-left: 3px solid silver;
+	border-right: 3px solid silver;
 }
   option{
 	
@@ -114,7 +129,10 @@ margin:0;
 	  font-size: 35px;
 	  color: #0073aa;
 	  padding-top: 20px;
+	  padding-bottom: 20px;
   }
   .bodyContent{
-	  background: #2C3E50;
+	  background: rgb(197, 199, 201);
+	  padding-left: 20px;
+	  padding-right:20px;
   }
