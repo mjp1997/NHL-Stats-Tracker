@@ -1,6 +1,7 @@
 let stats;
 let baseURL = 'http://statsapi.web.nhl.com/api/v1/teams/';
 let playerURL = 'http://statsapi.web.nhl.com';
+let factsURL = 'http://statsapi.web.nhl.com/api/v1/people/';
 let teamSelector = '/roster';
 
 let dropDownDiv = document.getElementById('dropDownInfo')
@@ -41,9 +42,30 @@ function buttonLink() {
 			loadAPI(urlParam)
 		}
 	});
-	
-}
 
+}
+function playerFacts(element) {
+	let playerInfoURL = factsURL + element;
+	let headerDiv = document.querySelector('.contTwoWrapper');
+	// let bodyDiv = document.querySelector('.contTwoBody');
+	headerDiv.innerHTML = '';
+	// bodyDiv.innerHTML = '';
+	// let myDiv = document.getElementById('pasteData');
+	$.ajax({
+		type: "GET",
+		url: playerInfoURL,
+		async: true,
+		success: function (playerInfoURL) {
+			console.log(playerInfoURL);
+			let fullName = playerInfoURL['people'][0]['fullName'];
+			let playerWeight = playerInfoURL['people'][0]['weight'];
+			headerDiv.innerHTML += '<div class = "popUpHead">' + fullName + '</div>';
+			headerDiv.innerHTML += '<div class = "bodyContent">' + 'Weight: ' + playerWeight + '</div>';
+			// myDiv.innerHTML += "<span class = 'popUpFacts'" + playerWeight + "</span";
+			// console.log(myDiv);
+		}
+	})
+}
 //composing base URL
 function loadAPI(userTeam) {
 	let completeUrl = baseURL + userTeam + teamSelector;
@@ -58,11 +80,9 @@ function loadAPI(userTeam) {
 		async: true,
 		success: function (siteUrl) {
 			let myTeamURL = siteUrl['teams'][0]['officialSiteUrl'];
-			myDiv.innerHTML += "<li class='formatResult'><h3>For more information, visit the team site!</h1> <br> <a href ='formatResult'>" + myTeamURL + "</li >"
+			myDiv.innerHTML += "<li class='formatResult'><div>For more information, visit the team site!</div> <br> <a href ='formatResult'>" + myTeamURL + "</li >"
 		}
 	})
-
-
 	//Get request for player name, position, and number
 	$.ajax({
 		type: "GET",
@@ -70,26 +90,21 @@ function loadAPI(userTeam) {
 		async: true,
 		success: function (completeUrl) {
 			for (i = 0; i < completeUrl['roster'].length; i++) {
+				let myRoster = completeUrl['roster'][i]['person']['link'];
+				let factsId = myRoster.substr(15, 21);
 				let myPlayer = completeUrl['roster'][i]['person']['fullName'];
 				let playerNum = completeUrl['roster'][i]['jerseyNumber'];
 				let playerPos = completeUrl['roster'][i]['position']['abbreviation'];
 				let playerId = myPlayer.split(' ').join('_');
 				if (playerNum == null) {
 					playerNum = '(pending)';
-					myDiv.innerHTML += "<li class='formatResult' id =" + playerId + '>' + playerNum + ' ' + myPlayer + ' - ' + playerPos + '<li /> '
-					document.getElementById(playerId).addEventListener("click", myFunct);		
+					myDiv.innerHTML += "<li class='formatResult' id =" + playerId + ' onclick = playerFacts(this)' + '>' + playerNum + ' ' + myPlayer + ' - ' + playerPos + '<li /> '
 				}
-				else{
-					myDiv.innerHTML += "<li class='formatResult' id =" + playerId + '>' + '#' + playerNum + ' ' + myPlayer + ' - ' + playerPos + '<li /> '
-					let playerInfo = document.getElementById(playerId);
-					playerInfo.addEventListener("click", myFunct);
+				else {
+					myDiv.innerHTML += "<li class='formatResult' id =" + playerId + ' onclick = playerFacts(' + factsId + ')' + '>' + '#' + playerNum + ' ' + myPlayer + ' - ' + playerPos + '<li /> '
+				}
+
 			}
-
 		}
-	}
 	});
-	function myFunct(){
-	console.log(playerId);
-}
-
 }
