@@ -1,3 +1,4 @@
+
 let stats;
 let baseURL = 'http://statsapi.web.nhl.com/api/v1/teams/';
 let playerURL = 'http://statsapi.web.nhl.com';
@@ -59,8 +60,17 @@ function playerFacts(element) {
 			console.log(playerInfoURL);
 			let fullName = playerInfoURL['people'][0]['fullName'];
 			let playerWeight = playerInfoURL['people'][0]['weight'];
+			let playerHeight = playerInfoURL['people'][0]['height'];
+			playerHeight = playerHeight.replace('"', '')
+			let DOB = playerInfoURL['people'][0]['birthDate'];
+			DOB = moment(DOB).format('MM/DD/YYYY');
+			let playerCountry = playerInfoURL['people'][0]['birthCountry'];
+			let playerHomeTown = playerInfoURL['people'][0]['birthCity'];
 			headerDiv.innerHTML += '<div class = "popUpHead">' + fullName + '</div>';
-			headerDiv.innerHTML += '<div class = "bodyContent">' + 'Weight: ' + playerWeight + '</div>';
+			headerDiv.innerHTML += '<div class = "bodyContent">' +
+				'Born: ' + DOB + ' in ' + playerHomeTown + ', ' + playerCountry + '</div>';
+			headerDiv.innerHTML += '<div class = "bodyContent">' + 'Height: ' + playerHeight +
+				' Weight: ' + playerWeight + ' lbs' + '</div>'
 			// myDiv.innerHTML += "<span class = 'popUpFacts'" + playerWeight + "</span";
 			// console.log(myDiv);
 		}
