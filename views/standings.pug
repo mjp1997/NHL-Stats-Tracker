@@ -1,0 +1,13 @@
+extends layout	
+block body
+	body 
+		h1 Current NHL Standings
+		
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js")
+		script(src="/js/jquery.js")
+		script(src="/js/standings.js")
+		div.standingsContainer
+			ul#metroDiv Metro Division
+			ul#atlanticDiv Atlantic Division
+			ul#centralDiv Central Division
+			ul#pacificDiv Pacific Division

@@ -1,0 +1,26 @@
+extends layout
+block title 
+    title Team Stats
+
+block body
+    h1 Team Rosters
+    p.homePara(style='text-align:center').
+        The NHL is comprised of 31 teams, the newest being the Vegas Golden Knights. 
+        Below, you will find the complete roster of every NHL team and specific information
+        about the players.
+    .overallContainerTeam
+        .contOneTeam
+            .rosterHeader
+            | View Any NHL Team's Roster!
+            br
+            br
+            .dropDownWrapper
+            select#dropDownInfo(onchange='buttonLink()')
+            ul#pasteData
+        .contTwo
+            div(style='margin:0 auto;')
+                img#ovieImg(src='/images/stanleycup.jpg')
+            .contTwoWrapper
+            script(src="/js/statsRetriever.js")
+            script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js")
+            script(src="/js/jquery.js")
