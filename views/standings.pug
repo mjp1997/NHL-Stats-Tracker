@@ -1,7 +1,12 @@
-extends layout	
+extends layout
+block title
+	title Standings	
 block body
 	body 
 		h1 Current NHL Standings
+		div(style='width:100%; display: flex')
+			select#standingsDropDown(onchange = 'buttonLink()')
+
 		
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js")
 		script(src="/js/jquery.js")

@@ -9,11 +9,11 @@
 		"pug": "^2.0.4"
 	},
 	"devDependencies": {
-		"webpack": "^4.39.2"
+		"webpack": "^4.39.2",
+		"webpack-cli": "^3.3.7"
 	},
 	"scripts": {
-		"start": "nodemon app.js",
-		"build": "webpack --config webpack.config.js"
+		"start": "nodemon app.js"
 	},
 	"author": "",
 	"license": "ISC",

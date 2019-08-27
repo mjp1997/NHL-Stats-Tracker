@@ -24,6 +24,9 @@ app.get('/teamstats', (req, res) => {
 app.get('/standings', (req, res) => {
 	res.render('standings');
 })
+app.get('/hockeyresources', (req, res) => {
+	res.render('hockeyresources');
+})
 
 app.listen(4000, function () {
 	console.log('listening on port 4000');
