@@ -205,16 +205,87 @@ function buttonLink() {
 				url: teamBase,
 				async: true,
 				success: function (teamBase) {
-					metroArray.push([idArray[i], parseFloat(teamBase['stats'][0]['splits'][0]['stat']['ot'])]);
-					atlanticArray.sort(function (a, b) {
+					metroArray.push([idArray[i], parseInt(teamBase['stats'][0]['splits'][0]['stat']['ot'])]);
+					metroArray.sort(function (a, b) {
 						return a[1] - b[1];
 					});
 					console.log(metroArray);
-					if (i === 15) {
-						for (i = 0; i <= 7; i++) {
+					if (i === 7) {
+						for (i = 0; i < 8; i++) {
 							console.log(metroArray[i])
-							myLi = '';
-							myLi.innerHTML += metroArray[i]
+							console.log(i);
+							myLi = document.createElement('li');
+							myImg = document.createElement('IMG');
+							myDiv = document.createElement('div');
+							myLi.className = 'formatStandings';
+							// myLi.innerHTML == centralArray[i][1];
+							if (metroArray[i][0] === 15) {
+								myImg.className = 'teamLogo'
+								myImg.setAttribute("src", picsObj['WashingtonCapitals']);
+								myDiv.appendChild(myImg);
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'Washington Capitals' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + metroArray[i][1];
+							}
+							else if (metroArray[i][0] === 2) {
+								myImg.className = 'teamLogo'
+								myImg.setAttribute("src", picsObj['NewYorkIslanders']);
+								myDiv.appendChild(myImg);
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'New York Islanders' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + metroArray[i][1];
+							}
+							else if (metroArray[i][0] === 5) {
+								myImg.className = 'teamLogo'
+								myImg.setAttribute("src", picsObj['PittsburghPenguins']);
+								myDiv.appendChild(myImg);
+								myLi.appendChild(myDiv)
+								myLi.innerHTML += 'Pittsburgh Penguins' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + metroArray[i][1];
+							}
+							else if (metroArray[i][0] === 12) {
+								myImg.className = 'teamLogo'
+								myImg.setAttribute("src", picsObj['CarolinaHurricanes']);
+								myDiv.appendChild(myImg);
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'Carolina Hurricanes' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + metroArray[i][1]
+							}
+							else if (metroArray[i][0] === 29) {
+								myImg.className = 'teamLogo'
+								myImg.setAttribute("src", picsObj['ColumbusBlueJackets']);
+								myDiv.appendChild(myImg);
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'Columbus Blue Jackets' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + metroArray[i][1];
+							}
+							else if (metroArray[i][0] === 4) {
+								myImg.className = 'teamLogo'
+								myImg.setAttribute("src", picsObj['PhiladelphiaFlyers']);
+								myDiv.appendChild(myImg);
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'Philadelphia Flyers' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + metroArray[i][1];
+							}
+							else if (metroArray[i][0] === 3) {
+								myImg.className = 'teamLogo'
+								myImg.setAttribute("src", picsObj['NewYorkRangers']);
+								myDiv.appendChild(myImg);
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'New York Rangers' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + metroArray[i][1];
+							}
+							else {
+								myImg.className = 'teamLogo'
+								myImg.setAttribute("src", picsObj['NewJerseyDevils']);
+								myDiv.appendChild(myImg);
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'New Jersey Devils' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + metroArray[i][1];
+							}
+
+							console.log(myLi);
+							document.getElementById('metroDiv').appendChild(myLi)
 
 						}
 					}
@@ -240,10 +311,81 @@ function buttonLink() {
 					});
 					console.log(atlanticArray);
 					if (i === 15) {
-						for (i = 0; i <= 7; i++) {
-							console.log(atlanticArray[i])
-							myLi = '';
-							myLi.innerHTML += atlanticArray[i]
+						for (i = 0; i < 8; i++) {
+							console.log(metroArray[i])
+							console.log(i);
+							myLi = document.createElement('li');
+							myImg = document.createElement('IMG');
+							myDiv = document.createElement('div');
+							myLi.className = 'formatStandings';
+							// myLi.innerHTML == centralArray[i][1];
+							if (atlanticArray[i][0] === 14) {
+								myImg.className = 'teamLogo'
+								myImg.setAttribute("src", picsObj['TampaBayLightning']);
+								myDiv.appendChild(myImg);
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'Tampa Bay Lightning' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + atlanticArray[i][1];
+							}
+							else if (atlanticArray[i][0] === 6) {
+								myImg.className = 'teamLogo'
+								myImg.setAttribute("src", picsObj['BostonBruins']);
+								myDiv.appendChild(myImg);
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'Boston Bruins' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + atlanticArray[i][1];
+							}
+							else if (atlanticArray[i][0] === 10) {
+								myImg.className = 'teamLogo'
+								myImg.setAttribute("src", picsObj['TorontoMapleLeafs']);
+								myDiv.appendChild(myImg);
+								myLi.appendChild(myDiv)
+								myLi.innerHTML += 'Toronto Maple' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + atlanticArray[i][1];
+							}
+							else if (atlanticArray[i][0] === 8) {
+								myImg.className = 'teamLogo'
+								myImg.setAttribute("src", picsObj['Montréal Canadiens']);
+								myDiv.appendChild(myImg);
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'Montréal Canadiens' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + atlanticArray[i][1]
+							}
+							else if (atlanticArray[i][0] === 13) {
+								myImg.className = 'teamLogo'
+								myImg.setAttribute("src", picsObj['FloridaPanthers']);
+								myDiv.appendChild(myImg);
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'Florida Panthers' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + atlanticArray[i][1];
+							}
+							else if (atlanticArray[i][0] === 17) {
+								myImg.className = 'teamLogo'
+								myImg.setAttribute("src", picsObj['DetroitRedWings']);
+								myDiv.appendChild(myImg);
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'Detroit Red Wings' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + atlanticArray[i][1];
+							}
+							else if (atlanticArray[i][0] === 7) {
+								myImg.className = 'teamLogo'
+								myImg.setAttribute("src", picsObj['BuffaloSabres']);
+								myDiv.appendChild(myImg);
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'Buffalo Sabres' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + atlanticArray[i][1];
+							}
+							else {
+								myImg.className = 'teamLogo'
+								myImg.setAttribute("src", picsObj['OttawaSenators']);
+								myDiv.appendChild(myImg);
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'Ottawa Senators' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + atlanticArray[i][1];
+							}
+
+							console.log(myLi);
+							document.getElementById('atlanticDiv').appendChild(myLi)
 
 						}
 					}
@@ -281,60 +423,60 @@ function buttonLink() {
 							myLi.className = 'formatStandings';
 							// myLi.innerHTML == centralArray[i][1];
 							if (centralArray[i][0] === 16) {
-								myLi.innerHTML += 'Chicago Blackhawks';
-								myLi.innerHTML += centralArray[i][1]
 								myImg.className = 'teamLogo'
 								myImg.setAttribute("src", picsObj['ChicagoBlackhawks']);
 								myDiv.appendChild(myImg);
-								myLi.appendChild(myDiv)
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'Chicago Blackhawks' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + centralArray[i][1]
 							}
 							else if (centralArray[i][0] === 18) {
-								myLi.innerHTML += 'Nashville Predators';
-								myLi.innerHTML += centralArray[i][1]
 								myImg.className = 'teamLogo'
 								myImg.setAttribute("src", picsObj['NashvillePredators']);
 								myDiv.appendChild(myImg);
 								myLi.appendChild(myDiv)
+								myLi.innerHTML += 'Nashville Predators' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + centralArray[i][1]
 							}
 							else if (centralArray[i][0] === 19) {
-								myLi.innerHTML += 'St. Louis Blues';
-								myLi.innerHTML += centralArray[i][1]
 								myImg.className = 'teamLogo'
 								myImg.setAttribute("src", picsObj['StLouisBlues']);
 								myDiv.appendChild(myImg);
-								myLi.appendChild(myDiv)
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'St. Louis Blues' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + centralArray[i][1]
 							}
 							else if (centralArray[i][0] === 21) {
-								myLi.innerHTML += 'Colorado Avalanche';
-								myLi.innerHTML += centralArray[i][1]
 								myImg.className = 'teamLogo'
 								myImg.setAttribute("src", picsObj['ColoradoAvalanche']);
 								myDiv.appendChild(myImg);
-								myLi.appendChild(myDiv)
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'Colorado Avalanche' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + centralArray[i][1];
 							}
 							else if (centralArray[i][0] === 25) {
-								myLi.innerHTML += 'Dallas Stars';
-								myLi.innerHTML += centralArray[i][1]
 								myImg.className = 'teamLogo'
 								myImg.setAttribute("src", picsObj['DallasStars']);
 								myDiv.appendChild(myImg);
-								myLi.appendChild(myDiv)
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'Dallas Stars' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + centralArray[i][1]
 							}
 							else if (centralArray[i][0] === 30) {
-								myLi.innerHTML += 'Minnesota Wild';
-								myLi.innerHTML += centralArray[i][1];
 								myImg.className = 'teamLogo'
 								myImg.setAttribute("src", picsObj['MinnesotaWild']);
 								myDiv.appendChild(myImg);
-								myLi.appendChild(myDiv)
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'Minnesota Wild' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + centralArray[i][1];
 							}
 							else {
-								myLi.innerHTML += 'Winnipeg Jets ';
-								myLi.innerHTML += 'Overtime Losses: ' + centralArray[i][1];
 								myImg.className = 'teamLogo'
 								myImg.setAttribute("src", picsObj['WinnipegJets']);
 								myDiv.appendChild(myImg);
-								myLi.appendChild(myDiv)
+								myLi.appendChild(myDiv);
+								myLi.innerHTML += 'Winnipeg Jets ' + '</br>';
+								myLi.innerHTML += 'OT Losses: ' + centralArray[i][1];
 							}
 
 							console.log(myLi);
@@ -348,4 +490,102 @@ function buttonLink() {
 		}
 
 	}
+
+for (let i = 23; i <= 30; i++) {
+	if (userInput === 'Overtime Losses') {
+		document.getElementById('pacificDiv').innerHTML = '';
+		let idKey = (idArray[i])
+		teamBase = filtersBase + '/' + idKey + '/stats';
+		$.ajax({
+			type: "GET",
+			url: teamBase,
+			async: true,
+			success: function (teamBase) {
+				pacificArray.push([idArray[i], parseFloat(teamBase['stats'][0]['splits'][0]['stat']['ot'])]);
+				pacificArray.sort(function (a, b) {
+					return a[1] - b[1];
+				});				if (i === 30) {
+					for (i = 0; i < 8; i++) {
+						console.log(i);
+						myLi = document.createElement('li');
+						myImg = document.createElement('IMG');
+						myDiv = document.createElement('div');
+						myLi.className = 'formatStandings';
+						// myLi.innerHTML == centralArray[i][1];
+						if (pacificArray[i][0] === 20) {
+							myImg.className = 'teamLogo'
+							myImg.setAttribute("src", picsObj['CalgaryFlames']);
+							myDiv.appendChild(myImg);
+							myLi.appendChild(myDiv);
+							myLi.innerHTML += 'Calgary Flames' + '</br>';
+							myLi.innerHTML += 'OT Losses: ' + pacificArray[i][1];
+						}
+						else if (pacificArray[i][0] === 28) {
+							myImg.className = 'teamLogo'
+							myImg.setAttribute("src", picsObj['SanJoseSharks']);
+							myDiv.appendChild(myImg);
+							myLi.appendChild(myDiv);
+							myLi.innerHTML += 'San Jose Sharks' + '</br>';
+							myLi.innerHTML += 'OT Losses: ' + pacificArray[i][1];
+						}
+						else if (pacificArray[i][0] === 54) {
+							myImg.className = 'teamLogo'
+							myImg.setAttribute("src", picsObj['VegasGoldenKnights']);
+							myDiv.appendChild(myImg);
+							myLi.appendChild(myDiv)
+							myLi.innerHTML += 'Vegas Golden Knights' + '</br>';
+							myLi.innerHTML += 'OT Losses: ' + pacificArray[i][1];
+						}
+						else if (pacificArray[i][0] === 53) {
+							myImg.className = 'teamLogo'
+							myImg.setAttribute("src", picsObj['ArizonaCoyotes']);
+							myDiv.appendChild(myImg);
+							myLi.appendChild(myDiv);
+							myLi.innerHTML += 'Arizona Coyotes' + '</br>';
+							myLi.innerHTML += 'OT Losses: ' + pacificArray[i][1]
+						}
+						else if (pacificArray[i][0] === 23) {
+							myImg.className = 'teamLogo'
+							myImg.setAttribute("src", picsObj['VancouverCanucks']);
+							myDiv.appendChild(myImg);
+							myLi.appendChild(myDiv);
+							myLi.innerHTML += 'Vancouver Canucks' + '</br>';
+							myLi.innerHTML += 'OT Losses: ' + pacificArray[i][1];
+						}
+						else if (pacificArray[i][0] === 24) {
+							myImg.className = 'teamLogo'
+							myImg.setAttribute("src", picsObj['AnaheimDucks']);
+							myDiv.appendChild(myImg);
+							myLi.appendChild(myDiv);
+							myLi.innerHTML += 'Anaheim Ducks' + '</br>';
+							myLi.innerHTML += 'OT Losses: ' + pacificArray[i][1];
+						}
+						else if (pacificArray[i][0] === 22) {
+							myImg.className = 'teamLogo'
+							myImg.setAttribute("src", picsObj['EdmontonOilers']);
+							myDiv.appendChild(myImg);
+							myLi.appendChild(myDiv);
+							myLi.innerHTML += 'Edmonton Oilers' + '</br>';
+							myLi.innerHTML += 'OT Losses: ' + pacificArray[i][1];
+						}
+						else {
+							myImg.className = 'teamLogo'
+							myImg.setAttribute("src", picsObj['LosAngelesKings']);
+							myDiv.appendChild(myImg);
+							myLi.appendChild(myDiv);
+							myLi.innerHTML += 'Los Angeles Kings' + '</br>';
+							myLi.innerHTML += 'OT Losses: ' + pacificArray[i][1];
+						}
+
+						console.log(myLi);
+						document.getElementById('pacificDiv').appendChild(myLi)
+
+					}
+				}
+			},
+
+		});
+	}
+
+}
 }
