@@ -1,29 +1,29 @@
 {
-	"name": "nhlpractice",
-	"version": "1.0.0",
-	"main": "base.js",
-	"dependencies": {
-		"express": "^4.17.1",
-		"moment": "^2.24.0",
-		"nodemon": "^1.19.1",
-		"pug": "^2.0.4"
-	},
-	"devDependencies": {
-		"webpack": "^4.39.2",
-		"webpack-cli": "^3.3.7"
-	},
-	"scripts": {
-		"start": "nodemon app.js"
-	},
-	"author": "",
-	"license": "ISC",
-	"description": "Tracks National Hockey League Statistics with an emphasis on the St. Louis Blues using the nhl statsapi",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/mjp1997/NHL-Stats-Tracker.git"
-	},
-	"bugs": {
-		"url": "https://github.com/mjp1997/NHL-Stats-Tracker/issues"
-	},
-	"homepage": "https://github.com/mjp1997/NHL-Stats-Tracker#readme"
+  "name": "nhlpractice",
+  "version": "1.0.0",
+  "main": "mybase.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "nodemon": "^1.19.1",
+    "pug": "^2.0.4"
+  },
+  "devDependencies": {
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7"
+  },
+  "scripts": {
+    "start": "node mybase.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "Tracks National Hockey League Statistics with an emphasis on the St. Louis Blues using the nhl statsapi",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjp1997/NHL-Stats-Tracker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mjp1997/NHL-Stats-Tracker/issues"
+  },
+  "homepage": "https://github.com/mjp1997/NHL-Stats-Tracker#readme"
 }

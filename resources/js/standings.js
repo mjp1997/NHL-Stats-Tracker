@@ -81,7 +81,7 @@ $.ajax({
 			myLi.innerHTML += '-' + standingsBase['records'][0]['teamRecords'][i]['leagueRecord']['ot'];
 			myLi.innerHTML += '</br>' + ' Points: ' + standingsBase['records'][0]['teamRecords'][i]['points'];
 			document.getElementById('metroDiv').appendChild(myLi);
-			buttonLink()
+			// buttonLink()
 			// document.getElementById('pacificDiv').appendChild(myDiv);
 		}
 		for (i = 0; i <= 7; i++) {

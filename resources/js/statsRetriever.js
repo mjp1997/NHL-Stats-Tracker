@@ -4,20 +4,35 @@ let baseURL = 'http://statsapi.web.nhl.com/api/v1/teams/';
 let playerURL = 'http://statsapi.web.nhl.com';
 let factsURL = 'http://statsapi.web.nhl.com/api/v1/people/';
 let teamSelector = '/roster';
-
-let dropDownDiv = document.getElementById('dropDownInfo')
+let objIndex;
+let dropDownDiv = document.getElementById('displayTeams')
+console.log(picsObj);
 //array of all 31 NHL teams
-teamsArray = ['Select An Option: ', 'NJ Devils', 'NY Islanders', 'NY Rangers', 'Philadelphia Flyers', 'Pittsburgh Penguins',
-	'Boston Bruins', 'Buffalo Sabres', 'Montreal Canadiens', 'Ottawa Senators', 'Toronto Maple Leafs', 'Carolina Hurricanes', 'Florida Panthers',
+teamsArray = ['New Jersey Devils', 'New York Islanders', 'New York Rangers', 'Philadelphia Flyers', 'Pittsburgh Penguins',
+	'Boston Bruins', 'Buffalo Sabres', 'Montréal Canadiens', 'Ottawa Senators', 'Toronto Maple Leafs', 'Carolina Hurricanes', 'Florida Panthers',
 	'Tampa Bay Lightning', 'Washington Capitals', 'Chicago Blackhawks', 'Detroit Red Wings', 'Nashville Predators', 'St. Louis Blues', 'Calgary Flames',
 	'Colorado Avalanche', ' Edmonton Oilers', 'Vancouver Canucks', ' Anaheim Ducks', 'Dallas Stars', 'Los Angeles Kings', 'San Jose Sharks',
 	'Columbus Blue Jackets', 'Minnesota Wild', 'Arizona Coyotes', 'Winnipeg Jets', 'Vegas Golden Knights'];
-
+let i = 0;
+let teamIdent = '';
 dropDownDiv.innerHTML = teamsArray.map(function (team) {
-	return "<option class='dropDownText'>" + team + "</option>";
+	objIndex = team.split(' ').join('');
+	teamIdent = team.split(' ').join('_');
+	if(objIndex.includes('.') === true){
+		objIndex = objIndex.split('.').filter(e => e !== '.').join('');
+	}
+	console.log(objIndex);
+	console.log(picsObj[objIndex]);
+	return "<div class='dropDownText'>" + "<img src='" + picsObj[objIndex] + "'" + "class = 'teamLogoTwo'" + "id =" + "'" + teamIdent +  "'" + "</img>" + team + "</div>";
 }).join("");
 function buttonLink() {
-	let userInput = document.getElementById('dropDownInfo').value
+	console.log('entering');
+	document.getElementById('changeViaOpt').innerHTML = 'Enter a team by city or mascot: ';
+	document.getElementById('displayTeams').style.display = 'block';
+	let optionLabel = document.querySelector('.optionCont');
+	optionLabel.style.display = 'none';
+	let userInput = document.getElementById('dropDownInfo');
+	userInput.style.display = 'block';
 	console.log(userInput);
 	//Editing index passed to URL in order to accomodate 
 	//for the API's odd formatting
@@ -45,13 +60,30 @@ function buttonLink() {
 	});
 
 }
+let searchContent = '';
+function filterTeams(){
+	console.log('test')
+	let teamList = document.getElementsByClassName('teamLogoTwo');
+	teamList = Array.from(teamList);
+	teamList.map(function(image){
+		searchContent = document.getElementById('dropDownInfo').value
+		searchContent = searchContent.toUpperCase();
+		compId = image.id
+		compId = compId.toUpperCase();
+		compId = compId.replace('_', ' ')
+		console.log(compId);
+		if(compId.includes(searchContent) !== true){
+			image.parentElement.style.display = 'none';
+		}
+		else{
+			image.parentElement.style.display = 'block';
+		}
+	})
+}
 function playerFacts(element) {
 	let playerInfoURL = factsURL + element;
 	let headerDiv = document.querySelector('.contTwoWrapper');
-	// let bodyDiv = document.querySelector('.contTwoBody');
 	headerDiv.innerHTML = '';
-	// bodyDiv.innerHTML = '';
-	// let myDiv = document.getElementById('pasteData');
 	$.ajax({
 		type: "GET",
 		url: playerInfoURL,
@@ -59,20 +91,20 @@ function playerFacts(element) {
 		success: function (playerInfoURL) {
 			console.log(playerInfoURL);
 			let fullName = playerInfoURL['people'][0]['fullName'];
+			
 			let playerWeight = playerInfoURL['people'][0]['weight'];
 			let playerHeight = playerInfoURL['people'][0]['height'];
-			playerHeight = playerHeight.replace('"', '')
+			playerHeight = playerHeight.replace('"', '');
 			let DOB = playerInfoURL['people'][0]['birthDate'];
 			DOB = moment(DOB).format('MM/DD/YYYY');
 			let playerCountry = playerInfoURL['people'][0]['birthCountry'];
 			let playerHomeTown = playerInfoURL['people'][0]['birthCity'];
-			headerDiv.innerHTML += '<div class = "popUpHead">' + fullName + '</div>';
 			headerDiv.innerHTML += '<div class = "bodyContent">' +
 				'Born: ' + DOB + ' in ' + playerHomeTown + ', ' + playerCountry + '</div>';
 			headerDiv.innerHTML += '<div class = "bodyContent">' + 'Height: ' + playerHeight +
 				' Weight: ' + playerWeight + ' lbs' + '</div>'
-			// myDiv.innerHTML += "<span class = 'popUpFacts'" + playerWeight + "</span";
-			// console.log(myDiv);
+			document.getElementById(fullName.split(' ').join('_')).appendChild(headerDiv);
+			filterDropdown();
 		}
 	})
 }
@@ -106,6 +138,7 @@ function loadAPI(userTeam) {
 				let playerNum = completeUrl['roster'][i]['jerseyNumber'];
 				let playerPos = completeUrl['roster'][i]['position']['abbreviation'];
 				let playerId = myPlayer.split(' ').join('_');
+				console.log(factsId);
 				if (playerNum == null) {
 					playerNum = '(pending)';
 					myDiv.innerHTML += "<li class='formatResult' id =" + playerId + ' onclick = playerFacts(' + factsId + ')' + '>' + playerNum + ' ' + myPlayer + ' - ' + playerPos + '<li /> '
