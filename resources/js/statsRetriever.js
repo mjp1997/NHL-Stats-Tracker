@@ -87,15 +87,14 @@ function selectTeam(nhlTeam){
 	}
 let headerDiv = '';
 let openStatus = {};
-function playerFacts(element) {
+function playerFacts(element) { 
 	let playerInfo = document.querySelectorAll('.bodyContent');
 	playerInfo = Array.from(playerInfo);
 	if(playerInfo.length > 1){
-		playerInfo[0].classList.remove('bodyContent');
+		playerInfo[0].classList.remove('bodyContent'); //next 4 lines prevent players from double appending
 		playerInfo[0].innerHTML = '';
 		playerInfo[1].classList.remove('bodyContent');
 		playerInfo[1].innerHTML = '';
-		console.log(playerInfo);
 	}
 	let playerInfoURL = factsURL + element;
 	console.log(playerInfoURL);
@@ -107,7 +106,7 @@ function playerFacts(element) {
 		async: true,
 		success: function (playerInfoURL) {
 			console.log(playerInfoURL);
-			let fullName = playerInfoURL['people'][0]['fullName'];
+			let fullName = playerInfoURL['people'][0]['fullName']; //format player information
 			let playerWeight = playerInfoURL['people'][0]['weight'];
 			let playerHeight = playerInfoURL['people'][0]['height'];
 			playerHeight = playerHeight.replace('"', '');
