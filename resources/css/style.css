@@ -281,6 +281,9 @@ transform: scale(1.2)
 #displayTeams{
 	display:none;
 }
+#displayPlayers{
+	display: none;
+}
 #metroDiv{
 	width: 20%;
 	font-size: 35px;

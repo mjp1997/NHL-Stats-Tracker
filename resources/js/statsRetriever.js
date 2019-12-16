@@ -7,6 +7,12 @@ let teamSelector = '/roster';
 let objIndex;
 let dropDownDiv = document.getElementById('displayTeams')
 console.log(picsObj);
+
+document.body.addEventListener( 'click', function ( event ) {
+	if( event.srcElement.id == 'backButton' ) {
+	  backButton();
+	};
+  } );
 //array of all 31 NHL teams
 teamsArray = ['New Jersey Devils', 'New York Islanders', 'New York Rangers', 'Philadelphia Flyers', 'Pittsburgh Penguins',
 	'Boston Bruins', 'Buffalo Sabres', 'Montréal Canadiens', 'Ottawa Senators', 'Toronto Maple Leafs', 'Carolina Hurricanes', 'Florida Panthers',
@@ -23,7 +29,7 @@ dropDownDiv.innerHTML = teamsArray.map(function (team) {
 	}
 	console.log(objIndex);
 	console.log(picsObj[objIndex]);
-	return "<div class='dropDownText'>" + "<img src='" + picsObj[objIndex] + "'" + "class = 'teamLogoTwo'" + "id =" + "'" + teamIdent +  "'" + "</img>" + team + "</div>";
+	return "<div class='dropDownText'" + 'onclick = selectTeam(' + teamIdent +')'  + ">"  + "<img src='" + picsObj[objIndex] + "'" + "class = 'teamLogoTwo'" + "id =" + "'" + teamIdent +  "'" + "</img>" + team + "</div>";
 }).join("");
 function buttonLink() {
 	console.log('entering');
@@ -36,29 +42,6 @@ function buttonLink() {
 	console.log(userInput);
 	//Editing index passed to URL in order to accomodate 
 	//for the API's odd formatting
-	teamsArray.forEach(nhlTeam => {
-		if (nhlTeam === userInput) {
-			let urlParam = teamsArray.indexOf(nhlTeam);
-			if (urlParam > 10 && urlParam < 26) {
-				urlParam = urlParam + 1;
-			}
-			if (urlParam > 26) {
-				urlParam = urlParam + 2;
-			}
-			if (userInput === 'Arizona Coyotes') {
-				urlParam = 53;
-			}
-			if (userInput === 'Winnipeg Jets') {
-				urlParam = 52;
-			}
-			if (userInput === 'Vegas Golden Knights') {
-				urlParam = 54;
-			}
-			urlParam = urlParam.toString()
-			loadAPI(urlParam)
-		}
-	});
-
 }
 let searchContent = '';
 function filterTeams(){
@@ -80,9 +63,43 @@ function filterTeams(){
 		}
 	})
 }
+function selectTeam(nhlTeam){
+	nhlTeam = nhlTeam.id.split('_').join(' ');
+		let urlParam = teamsArray.indexOf(nhlTeam) + 1;
+		if (urlParam > 10 && urlParam < 26) {
+			urlParam = urlParam + 1;
+		}
+		if (urlParam > 26) {
+			urlParam = urlParam + 2;
+		}
+		if (urlParam === 31) {
+			urlParam = 53;
+		}
+		if (urlParam === 32) {
+			urlParam = 52;
+		}
+		if (urlParam === 33) {
+			urlParam = 54;
+		}
+		urlParam = urlParam.toString()
+		console.log(urlParam)
+		loadAPI(urlParam)
+	}
+let headerDiv = '';
+let openStatus = {};
 function playerFacts(element) {
+	let playerInfo = document.querySelectorAll('.bodyContent');
+	playerInfo = Array.from(playerInfo);
+	if(playerInfo.length > 1){
+		playerInfo[0].classList.remove('bodyContent');
+		playerInfo[0].innerHTML = '';
+		playerInfo[1].classList.remove('bodyContent');
+		playerInfo[1].innerHTML = '';
+		console.log(playerInfo);
+	}
 	let playerInfoURL = factsURL + element;
-	let headerDiv = document.querySelector('.contTwoWrapper');
+	console.log(playerInfoURL);
+	headerDiv = document.createElement('div')
 	headerDiv.innerHTML = '';
 	$.ajax({
 		type: "GET",
@@ -91,7 +108,6 @@ function playerFacts(element) {
 		success: function (playerInfoURL) {
 			console.log(playerInfoURL);
 			let fullName = playerInfoURL['people'][0]['fullName'];
-			
 			let playerWeight = playerInfoURL['people'][0]['weight'];
 			let playerHeight = playerInfoURL['people'][0]['height'];
 			playerHeight = playerHeight.replace('"', '');
@@ -104,27 +120,23 @@ function playerFacts(element) {
 			headerDiv.innerHTML += '<div class = "bodyContent">' + 'Height: ' + playerHeight +
 				' Weight: ' + playerWeight + ' lbs' + '</div>'
 			document.getElementById(fullName.split(' ').join('_')).appendChild(headerDiv);
-			filterDropdown();
 		}
 	})
 }
 //composing base URL
 function loadAPI(userTeam) {
 	let completeUrl = baseURL + userTeam + teamSelector;
-	let siteUrl = baseURL + userTeam;
-	let myDiv = document.getElementById('pasteData');
+	// let siteUrl = baseURL + userTeam;
+	document.getElementById('displayTeams').style.display = 'none';
+	let myDiv = document.getElementById('displayPlayers');
 	myDiv.innerHTML = '';
-
-	//Get request for team website's URL
-	$.ajax({
-		type: "GET",
-		url: siteUrl,
-		async: true,
-		success: function (siteUrl) {
-			let myTeamURL = siteUrl['teams'][0]['officialSiteUrl'];
-			myDiv.innerHTML += "<li class='formatResult'><div>For more information, visit the team site!</div> <br> <a href ='formatResult'>" + myTeamURL + "</li >"
-		}
-	})
+	myDiv.style.display = 'block';
+	let backButton = document.createElement('button');
+	backButton.innerHTML = 'Search for Another Roster: '
+	backButton.id = 'backButton'
+	backButton.style.height = '40px';
+	myDiv.innerHTML = '';
+	myDiv.appendChild(backButton);
 	//Get request for player name, position, and number
 	$.ajax({
 		type: "GET",
@@ -138,17 +150,23 @@ function loadAPI(userTeam) {
 				let playerNum = completeUrl['roster'][i]['jerseyNumber'];
 				let playerPos = completeUrl['roster'][i]['position']['abbreviation'];
 				let playerId = myPlayer.split(' ').join('_');
-				console.log(factsId);
 				if (playerNum == null) {
 					playerNum = '(pending)';
 					myDiv.innerHTML += "<li class='formatResult' id =" + playerId + ' onclick = playerFacts(' + factsId + ')' + '>' + playerNum + ' ' + myPlayer + ' - ' + playerPos + '<li /> '
 				}
 				else {
+					console.log('appending');
 					myDiv.innerHTML += "<li class='formatResult' id =" + playerId + ' onclick = playerFacts(' + factsId + ')' + '>' + '#' + playerNum + ' ' + myPlayer + ' - ' + playerPos + '<li /> '
 				}
 
 			}
 		}
 	});
+}
+function backButton(){
+	console.log('entering')
+	document.getElementById('displayTeams').style.display = 'block';
+	document.getElementById('displayPlayers').style.display = 'none';
+
 }
 // module.exports = stats;
