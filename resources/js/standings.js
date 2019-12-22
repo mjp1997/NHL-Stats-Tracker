@@ -193,8 +193,8 @@ function buttonLink() {
 	userInput = document.getElementById('standingsDropDown').value;
 	console.log(userInput);
 	filtersBase = 'https://statsapi.web.nhl.com/api/v1/teams';
-	for (let i = 0; i <= 7; i++) {
-		if (userInput === 'Overtime Losses') {
+	if (userInput === 'Overtime Losses') {
+		for (let i = 0; i <= 7; i++) {
 			document.getElementById('metroDiv').innerHTML = '';
 			let idKey = (idArray[i])
 			console.log(idKey);
@@ -209,11 +209,10 @@ function buttonLink() {
 					metroArray.sort(function (a, b) {
 						return a[1] - b[1];
 					});
-					console.log(metroArray);
 					if (i === 7) {
+						console.log(metroArray);
 						for (i = 0; i < 8; i++) {
 							console.log(metroArray[i])
-							console.log(i);
 							myLi = document.createElement('li');
 							myImg = document.createElement('IMG');
 							myDiv = document.createElement('div');
@@ -293,10 +292,7 @@ function buttonLink() {
 
 			});
 		}
-
-	}
 	for (let i = 8; i <= 15; i++) {
-		if (userInput === 'Overtime Losses') {
 			document.getElementById('atlanticDiv').innerHTML = '';
 			let idKey = (idArray[i])
 			teamBase = filtersBase + '/' + idKey + '/stats';
@@ -311,8 +307,9 @@ function buttonLink() {
 					});
 					console.log(atlanticArray);
 					if (i === 15) {
+						console.log(atlanticArray)
 						for (i = 0; i < 8; i++) {
-							console.log(metroArray[i])
+							console.log(atlanticArray[i])
 							console.log(i);
 							myLi = document.createElement('li');
 							myImg = document.createElement('IMG');
@@ -394,10 +391,8 @@ function buttonLink() {
 			});
 		}
 
-	}
 
 	for (let i = 16; i <= 22; i++) {
-		if (userInput === 'Overtime Losses') {
 			document.getElementById('centralDiv').innerHTML = '';
 			let idKey = (idArray[i])
 			console.log(idKey);
@@ -414,9 +409,9 @@ function buttonLink() {
 					});
 					console.log(centralArray);
 					if (i === 22) {
+						console.log(centralArray)
 						for (i = 0; i < 7; i++) {
 							console.log(centralArray[i])
-							console.log(i);
 							myLi = document.createElement('li');
 							myImg = document.createElement('IMG');
 							myDiv = document.createElement('div');
@@ -487,12 +482,9 @@ function buttonLink() {
 				},
 
 			});
-		}
-
 	}
 
 for (let i = 23; i <= 30; i++) {
-	if (userInput === 'Overtime Losses') {
 		document.getElementById('pacificDiv').innerHTML = '';
 		let idKey = (idArray[i])
 		teamBase = filtersBase + '/' + idKey + '/stats';
@@ -504,9 +496,11 @@ for (let i = 23; i <= 30; i++) {
 				pacificArray.push([idArray[i], parseFloat(teamBase['stats'][0]['splits'][0]['stat']['ot'])]);
 				pacificArray.sort(function (a, b) {
 					return a[1] - b[1];
-				});				if (i === 30) {
+				});				
+				if (i === 30) {
+					console.log(pacificArray)
 					for (i = 0; i < 8; i++) {
-						console.log(i);
+						console.log(pacificArray[i]);
 						myLi = document.createElement('li');
 						myImg = document.createElement('IMG');
 						myDiv = document.createElement('div');
@@ -576,7 +570,6 @@ for (let i = 23; i <= 30; i++) {
 							myLi.innerHTML += 'Los Angeles Kings' + '</br>';
 							myLi.innerHTML += 'OT Losses: ' + pacificArray[i][1];
 						}
-
 						console.log(myLi);
 						document.getElementById('pacificDiv').appendChild(myLi)
 
@@ -586,6 +579,5 @@ for (let i = 23; i <= 30; i++) {
 
 		});
 	}
-
 }
 }

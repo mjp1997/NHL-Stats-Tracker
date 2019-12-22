@@ -6,13 +6,23 @@ let factsURL = 'http://statsapi.web.nhl.com/api/v1/people/';
 let teamSelector = '/roster';
 let objIndex;
 let dropDownDiv = document.getElementById('displayTeams')
-console.log(picsObj);
+let modal = document.getElementById('myModal')
+let playerPicCont = document.createElement('div');
 
-document.body.addEventListener( 'click', function ( event ) {
-	if( event.srcElement.id == 'backButton' ) {
-	  backButton();
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+	if (event.target == modal) {
+		console.log('closng..')
+		modal.style.display = "none";
+	}
+}
+console.log(picsObj);
+document.body.addEventListener('click', function (event) {
+	if (event.srcElement.id == 'backButton') {
+		backButton();
 	};
-  } );
+});
 //array of all 31 NHL teams
 teamsArray = ['New Jersey Devils', 'New York Islanders', 'New York Rangers', 'Philadelphia Flyers', 'Pittsburgh Penguins',
 	'Boston Bruins', 'Buffalo Sabres', 'Montréal Canadiens', 'Ottawa Senators', 'Toronto Maple Leafs', 'Carolina Hurricanes', 'Florida Panthers',
@@ -24,16 +34,16 @@ let teamIdent = '';
 dropDownDiv.innerHTML = teamsArray.map(function (team) {
 	objIndex = team.split(' ').join('');
 	teamIdent = team.split(' ').join('_');
-	if(objIndex.includes('.') === true){
+	if (objIndex.includes('.') === true) {
 		objIndex = objIndex.split('.').filter(e => e !== '.').join('');
 	}
 	console.log(objIndex);
 	console.log(picsObj[objIndex]);
-	return "<div class='dropDownText'" + 'onclick = selectTeam(' + teamIdent +')'  + ">"  + "<img src='" + picsObj[objIndex] + "'" + "class = 'teamLogoTwo'" + "id =" + "'" + teamIdent +  "'" + "</img>" + team + "</div>";
+	return "<div class='dropDownText'" + 'onclick = selectTeam(' + teamIdent + ')' + ">" + "<img src='" + picsObj[objIndex] + "'" + "class = 'teamLogoTwo'" + "id =" + "'" + teamIdent + "'" + "</img>" + team + "</div>";
 }).join("");
 function buttonLink() {
 	console.log('entering');
-	document.getElementById('changeViaOpt').innerHTML = 'Enter a team by city or mascot: ';
+	document.getElementById('changeViaOpt').innerHTML = '';
 	document.getElementById('displayTeams').style.display = 'block';
 	let optionLabel = document.querySelector('.optionCont');
 	optionLabel.style.display = 'none';
@@ -44,57 +54,91 @@ function buttonLink() {
 	//for the API's odd formatting
 }
 let searchContent = '';
-function filterTeams(){
+function filterTeams() {
 	console.log('test')
 	let teamList = document.getElementsByClassName('teamLogoTwo');
 	teamList = Array.from(teamList);
-	teamList.map(function(image){
+	teamList.map(function (image) {
 		searchContent = document.getElementById('dropDownInfo').value
 		searchContent = searchContent.toUpperCase();
 		compId = image.id
 		compId = compId.toUpperCase();
 		compId = compId.replace('_', ' ')
 		console.log(compId);
-		if(compId.includes(searchContent) !== true){
+		if (compId.includes(searchContent) !== true) {
 			image.parentElement.style.display = 'none';
 		}
-		else{
+		else {
 			image.parentElement.style.display = 'block';
 		}
 	})
 }
-function selectTeam(nhlTeam){
-	nhlTeam = nhlTeam.id.split('_').join(' ');
-		let urlParam = teamsArray.indexOf(nhlTeam) + 1;
-		if (urlParam > 10 && urlParam < 26) {
-			urlParam = urlParam + 1;
-		}
-		if (urlParam > 26) {
-			urlParam = urlParam + 2;
-		}
-		if (urlParam === 31) {
-			urlParam = 53;
-		}
-		if (urlParam === 32) {
-			urlParam = 52;
-		}
-		if (urlParam === 33) {
-			urlParam = 54;
-		}
-		urlParam = urlParam.toString()
-		console.log(urlParam)
-		loadAPI(urlParam)
+let playerSearch = '';
+let playerId = '';
+function filterPlayers(){
+	let teamList = document.getElementsByClassName('formatResult');
+	teamList = Array.from(teamList);
+	teamList.map(function (player) {
+	playerSearch = document.getElementById('filterPlayers').value;
+	playerSearch = playerSearch.toUpperCase();
+	playerId = player.id;
+	let playerIdComp = playerId.toUpperCase();
+	playerIdComp = playerIdComp.split('_').join(' ');
+	if(playerIdComp.includes(playerSearch) === true){
+		document.getElementById(playerId).style.display = 'block';
 	}
+	else{
+		document.getElementById(playerId).style.display = 'none';
+	}
+})
+}
+function selectTeam(nhlTeam) {
+	nhlTeam = nhlTeam.id.split('_').join(' ');
+	let urlParam = teamsArray.indexOf(nhlTeam) + 1;
+	if (urlParam > 10 && urlParam < 26) {
+		urlParam = urlParam + 1;
+	}
+	if (urlParam > 26) {
+		urlParam = urlParam + 2;
+	}
+	if (urlParam === 31) {
+		urlParam = 53;
+	}
+	if (urlParam === 32) {
+		urlParam = 52;
+	}
+	if (urlParam === 33) {
+		urlParam = 54;
+	}
+	urlParam = urlParam.toString()
+	console.log(urlParam)
+	loadAPI(urlParam)
+}
 let headerDiv = '';
 let openStatus = {};
-function playerFacts(element) { 
+let prevName = '';
+let namesArray = [];
+function playerFacts(element) {
 	let playerInfo = document.querySelectorAll('.bodyContent');
+	let playerImg = document.querySelectorAll('.playerImg');
 	playerInfo = Array.from(playerInfo);
-	if(playerInfo.length > 1){
+	playerImg = Array.from(playerImg);
+	console.log('playerinfo ' + playerInfo.length);
+	console.log('playerimg ' + playerImg.length);
+
+	if (playerInfo.length >= 1) {
 		playerInfo[0].classList.remove('bodyContent'); //next 4 lines prevent players from double appending
 		playerInfo[0].innerHTML = '';
-		playerInfo[1].classList.remove('bodyContent');
-		playerInfo[1].innerHTML = '';
+		document.getElementById(namesArray[namesArray.length - 1]).addEventListener('hover', function () {
+			document.getElementById(namesArray[namesArray.length - 1]).style = 'background-color: #1b7fa9'
+		})
+	}
+	if (playerImg.length >= 1) {
+		playerImg[0].style.display = 'none';
+		playerImg[0].classList.remove('playerImg')
+		for (let i = 0; i < playerImg.length; i++) {
+			console.log(playerImg[i])
+		}
 	}
 	let playerInfoURL = factsURL + element;
 	console.log(playerInfoURL);
@@ -105,37 +149,57 @@ function playerFacts(element) {
 		url: playerInfoURL,
 		async: true,
 		success: function (playerInfoURL) {
-			console.log(playerInfoURL);
 			let fullName = playerInfoURL['people'][0]['fullName']; //format player information
 			let playerWeight = playerInfoURL['people'][0]['weight'];
+			console.log(playerWeight)
 			let playerHeight = playerInfoURL['people'][0]['height'];
-			playerHeight = playerHeight.replace('"', '');
+			console.log(playerHeight)
 			let DOB = playerInfoURL['people'][0]['birthDate'];
 			DOB = moment(DOB).format('MM/DD/YYYY');
 			let playerCountry = playerInfoURL['people'][0]['birthCountry'];
 			let playerHomeTown = playerInfoURL['people'][0]['birthCity'];
-			headerDiv.innerHTML += '<div class = "bodyContent">' +
-				'Born: ' + DOB + ' in ' + playerHomeTown + ', ' + playerCountry + '</div>';
-			headerDiv.innerHTML += '<div class = "bodyContent">' + 'Height: ' + playerHeight +
-				' Weight: ' + playerWeight + ' lbs' + '</div>'
-			document.getElementById(fullName.split(' ').join('_')).appendChild(headerDiv);
+			let nameID = fullName.split(' ').join('_');
+			let myImg = document.createElement('img');
+			let addPlayerInfo = document.querySelectorAll('.modal-content');
+			addPlayerInfo = Array.from(addPlayerInfo)
+			addPlayerInfo = addPlayerInfo[0];
+			console.log(addPlayerInfo)
+			modal.style.display = 'block';
+			playerPicCont.className = 'playerPicCont';
+			namesArray.push(nameID);
+			myImg.className = 'playerImg';
+			myImg.setAttribute('src', "/images/" + nameID + ".jpg");
+			playerPicCont.innerHTML += nameID;
+			addPlayerInfo.appendChild(myImg);
+			addPlayerInfo.innerHTML += '<div class = "bodyContent">' + '<b>' + nameID + '</b>' + '<br>' + '<br>' +
+				'Born: ' + DOB + '<br>' + '<br>' + 'Hometown: ' + playerHomeTown + ', ' + playerCountry + '<br>' + '<br>' + 'Height: ' + playerHeight +
+				'<br>' + '<br>' + 'Weight: ' + playerWeight + ' lbs' + '</div>';
+
+			document.getElementById('closeMod').onclick = function () {
+				console.log('entering')
+				modal.style.display = "none";
+			}
 		}
 	})
 }
 //composing base URL
 function loadAPI(userTeam) {
+	document.getElementById('dropDownInfo').style.display = 'none';
 	let completeUrl = baseURL + userTeam + teamSelector;
-	// let siteUrl = baseURL + userTeam;
 	document.getElementById('displayTeams').style.display = 'none';
+	document.getElementById('filterPlayers').style.display = 'block';
 	let myDiv = document.getElementById('displayPlayers');
 	myDiv.innerHTML = '';
 	myDiv.style.display = 'block';
+	let buttonCont = document.createElement('div');
 	let backButton = document.createElement('button');
 	backButton.innerHTML = 'Search for Another Roster: '
-	backButton.id = 'backButton'
-	backButton.style.height = '40px';
+	backButton.id = 'backButton';
+	backButton.className = 'buttonStyle';
 	myDiv.innerHTML = '';
-	myDiv.appendChild(backButton);
+	buttonCont.id = 'buttonCont'
+	buttonCont.appendChild(backButton)
+	myDiv.appendChild(buttonCont);
 	//Get request for player name, position, and number
 	$.ajax({
 		type: "GET",
@@ -162,10 +226,12 @@ function loadAPI(userTeam) {
 		}
 	});
 }
-function backButton(){
+function backButton() {
 	console.log('entering')
 	document.getElementById('displayTeams').style.display = 'block';
 	document.getElementById('displayPlayers').style.display = 'none';
+	document.getElementById('dropDownInfo').style.display = 'block';
+	document.getElementById('filterPlayers').style.display = 'none';
 
 }
 // module.exports = stats;

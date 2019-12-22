@@ -131,19 +131,48 @@ margin:0;
 #dropDownInfo{
 	position: relative;
 	display: none;
+	outline-width: 0;
+    width: 35%;
+    border-top: none;
+    /* border-bottom: 2px #f5f2f2; */
+    margin: auto;
+    padding: 6px 8px 6px 10px;
+    height: 25px;
+    border-left: none;
+    border-left-width: initial;
+    border-left-style: none;
+    border-left-color: initial;
+    border-right: none;
+    font-size: 20px;
+    color: white;
+    text-shadow: 0 1px white;
+    background: #4FB9E0; 
+	
+}
+
+#filterPlayers{
+	position: relative;
+    display: none;
 	width: 35%;
-	margin: auto;
-	padding: 6px 8px 6px 10px;
-	height: 25px;
-	line-height: 14px;
-	font-size:20px;
-	color: #62717a;
-	text-shadow: 0 1px white;
-	background: #f2f2f2; 
+	outline-width: 0;
+    border-top: none;
+    /* border-bottom: 2px #f5f2f2; */
+    margin: auto;
+    padding: 6px 8px 6px 10px;
+    height: 25px;
+    border-left: none;
+    border-left-width: initial;
+    border-left-style: none;
+    border-left-color: initial;
+    border-right: none;
+    font-size: 20px;
+    color: white;
+    text-shadow: 0 1px white;
+    background: #4FB9E0; 
 	
 }
 .optionLabel{
-	/* text-align: center; */
+	text-align: center; 
 	padding-bottom: 10px;
     padding-left: 100px;
     margin: 0;
@@ -153,16 +182,7 @@ margin:0;
 	/* opacity: 0.7; */
     /* padding-bottom: 40px; */
 }
-.optionWrapper{
-	margin: auto;
-    padding-left: 50px;
-}
-.optionWrapper:hover{
-	cursor: pointer;
-	-webkit-transform: scale(1.2);
--ms-transform: scale(1.2);
-transform: scale(1.2)
-}
+
 /* .optionLabel:hover{
 	opacity: 1.0;
 	cursor: pointer;
@@ -172,7 +192,10 @@ transform: scale(1.2)
 	
 } */
 .optionCont{
-    width: 33%;
+    width: 19%;
+    text-align: center;
+    margin: auto;
+    display: block;
 }
 /* .optionCont{
 opacity: 1.0;
@@ -199,6 +222,29 @@ transform: scale(1.2)
 .imgleftCont{
 	width: 50%;
 }
+.buttonStyle{
+	/* display:inline-block; */
+	padding:0.35em 1.2em;
+	border: 0.1em solid #FFFFFF;
+	/* margin:0 0.3em 0.3em 0; */
+	border-radius:0.12em;
+	box-sizing: border-box;
+	text-decoration:none;
+	font-family:'Raleway', sans-serif;
+	font-weight:300;
+	color:#FFFFFF;
+	background: #4FB9E0;
+	text-align:center;
+	transition: all 0.2s;
+	height: 40px;
+	border-radius: 8px;
+
+}
+.buttonStyle:hover{
+	color:#000000;
+	cursor: pointer;
+	background-color:#FFFFFF;
+}
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .4);
     background-color: #CFCFCF
@@ -210,9 +256,7 @@ transform: scale(1.2)
 ::-webkit-scrollbar-thumb {
     background-color: #2C3E50
 }
-li:hover{
-	background-color: rgb(130, 192, 216);
-}
+
 li:active {
 	background: #aaabac;
 	-webkit-box-shadow: inset 0px 0px 5px #838282;
@@ -232,20 +276,14 @@ li:active {
 
 }
 .dropDownText:hover{
-	font-family:'Open Sans', sans-serif;
-	color:white;
-	text-align: center;
-	border: 1px white solid;
 	cursor: pointer;
-	background-color: rgb(96, 164, 190);
-	-webkit-transform: scale(1.2);
--ms-transform: scale(1.2);
-transform: scale(1.2)
+	background-color: #9dd6ee;
 }
+
 .formatResult{
 	/* padding-bottom: 10px; */
 	border-style: outset;
-	background-color: #347B98;
+	background-color:#1b7fa9;
 	color: white;
 	padding: 10px;
 	border-top: 3px solid rgb(207, 212, 226);
@@ -255,12 +293,72 @@ transform: scale(1.2)
 	cursor: pointer;
 	font-size: 20px;
 }
+.playerPicCont{
+	padding-bottom: 18px;
+}
+.playerImg{
+	height: 125px;
+    width: 125px;
+	text-align: right;
+	border-radius: 50%;
+	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	/* overflow: auto; Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+	background-color: #1b7fa9;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	text-align: center;
+	border: 1px solid #888;
+	width: 60%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+	color: white;
+	float: right;
+	font-size: 35px;
+	font-weight: bold;
+	background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    cursor: pointer;
+  }
+  
+  .close:hover,
+  .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+  }
+
+.formatResult:hover{
+	cursor:pointer;
+	background-color:#9dd6ee;
+}
 .formatStandings {	
-    /* padding-bottom: 10px; */
     border-style: outset;
     background-color: #347B98;
     color: white;
-    padding: 25px;
+    padding-bottom: 25px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 25p;
     border-top: 3px solid rgb(207, 212, 226);
     border-bottom: 0px;
     border-left: 3px solid rgb(207, 212, 226);
@@ -271,7 +369,6 @@ transform: scale(1.2)
     border-radius: 6px;
     text-align: center;
     line-height: 1.55;
-	/* position: relative; */
 	}
 
 .standingsContainer{
@@ -353,32 +450,19 @@ ul{
 	  padding-top: 20px;
 	  padding-bottom: 20px;
   }
-  .bodyContent:last-child{
-	background-color: #347B98;
-	padding-left: 20px;
-	  padding-right:20px;
-	  padding-bottom: 10px;
-	  text-align: left;
-	  padding-top:10px;
-	  border-style: outset;
-	  border-top: 0px solid rgb(207, 212, 226); 
-	  border-bottom: 3px solid rgb(207, 212, 226);
-	  border-left: 3px solid rgb(207, 212, 226);
-	  border-right: 3px solid rgb(207, 212, 226);
-	}
 	.bodyContent{
-		background-color: #347B98;
+		background-color: #1b7fa9;
 		padding-left: 20px;
-		  padding-right:20px;
-		  padding-bottom: 10px;
-		  text-align: left;
-		  padding-top:10px;
-		  border-style: outset;
-		  border-top: 3px solid rgb(207, 212, 226); 
-		  border-bottom: 0px;
-		  border-left: 3px solid rgb(207, 212, 226);
-		  border-right: 3px solid rgb(207, 212, 226);
-		  }
+		padding-right: 20px;
+		padding-bottom: 10px;
+		text-align: center;
+		padding-top: 10px;
+		}
+	#buttonCont{
+		text-align: center;
+		padding-bottom: 20px;
+	}
+
 	.fa-github{
 		color: #236AB9;
 		padding-left: 20px;
@@ -407,18 +491,32 @@ ul{
 	}
 	
 	.button {
-		background-color: #347B98;
-		color: white;
-		padding: 10px 26px;
-		text-align: center;
-		text-decoration: none;
-		display: inline-block;
-		font-size: 16px;
-		margin: 10px 10px 10px 10px;
-		border-radius: 8px;
+		    /* background-color: #347B98; */
+			background: #4FB9E0;
+			color: white;
+			padding: 10px 26px;
+			border: 1px solid;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 10px 10px 10px 10px;
+			border-radius: 8px;
 		}
 	
 	.button:hover{
 		background-color: rgb(157, 205, 224);
 	}
-
+	::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+		color: white;
+		font-family: 'Raleway', sans-serif;
+		opacity: 1; /* Firefox */
+	  }
+	  
+	  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+		color: white;
+	  }
+	  
+	  ::-ms-input-placeholder { /* Microsoft Edge */
+		color: white;
+	  }

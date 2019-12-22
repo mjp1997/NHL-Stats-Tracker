@@ -8,20 +8,23 @@ block body
         The NHL is comprised of 31 teams, the newest being the Vegas Golden Knights. 
 
         
-    div#changeViaOpt Would you like to search by:
+    div#changeViaOpt Wish to learn more about the teams and players?
 
     .overallContainerTeam
-        input#dropDownInfo(placeholder = "Please enter an NHL team", oninput='filterTeams()')
+        input#dropDownInfo(placeholder = "Please enter an NHL team: ", oninput='filterTeams()')
+        input#filterPlayers(placeholder = "Please enter a player: ", oninput='filterPlayers()')
         .contOneTeam
+            div#myModal.modal
+                div.modal-content
+                    button#closeMod.close &times;
+                br
+                br
             div#displayTeams
             div#displayPlayers
-                br
-                br
         
         div.optionCont
             div.optionWrapper 
-                div.optionLabel Team
-                img(src="images/filterbyteam.jpg", alt="", width = "300px", id = 'teamSelect',  onclick = 'buttonLink()')
+                button(src="images/filterbyteam.jpg", alt="", id = 'teamSelect',  class = 'buttonStyle',  onclick = 'buttonLink()') heck yeah, sounds great!
                 .dropDownWrapper
                 ul#pasteData
                 .contTwoWrapper
